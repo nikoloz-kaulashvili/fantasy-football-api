@@ -7,15 +7,20 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\SwapPlayersRequest;
 use App\Http\Requests\Api\UpdateTeamRequest;
 use App\Services\Api\SquadService;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class TeamController extends Controller
 {
+    use AuthorizesRequests;
+
     public function show(Request $request)
     {
         $team = $request->user()
             ->team()
             ->with(['starters', 'bench'])
             ->first();
+
+        $this->authorize('view', $team);
 
         return response()->json([
             'id' => $team->id,
@@ -42,6 +47,8 @@ class TeamController extends Controller
             ], 404);
         }
 
+        $this->authorize('update', $team);
+
         $team->update([
             'name' => $request->name,
             'country' => $request->country,
@@ -62,6 +69,14 @@ class TeamController extends Controller
     public function swap(SwapPlayersRequest $request, SquadService $service)
     {
         $team = auth()->user()->team;
+
+        if (!$team) {
+            return response()->json([
+                'message' => __('messages.team_not_found')
+            ], 404);
+        }
+
+        $this->authorize('update', $team);
 
         $in = $team->players()->findOrFail($request->in_player_id);
         $out = $team->players()->findOrFail($request->out_player_id);

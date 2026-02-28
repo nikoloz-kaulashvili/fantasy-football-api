@@ -7,10 +7,13 @@ use App\Http\Requests\Api\CreateListingRequest;
 use App\Http\Requests\Api\BuyListingRequest;
 use App\Models\TransferListing;
 use App\Services\Api\TransferMarketService;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 
 class MarketListingController extends Controller
 {
+    use AuthorizesRequests;
+
     public function __construct(
         protected TransferMarketService $market
     ) {}
@@ -28,6 +31,8 @@ class MarketListingController extends Controller
 
     public function store(CreateListingRequest $request)
     {
+        $this->authorize('create', TransferListing::class);
+
         $listing = $this->market->createListing(
             $request->user(),
             $request->player_id,
@@ -42,6 +47,8 @@ class MarketListingController extends Controller
 
     public function destroy(Request $request, TransferListing $listing)
     {
+        $this->authorize('delete', $listing);
+
         $this->market->cancelListing($request->user(), $listing);
 
         return response()->json([
