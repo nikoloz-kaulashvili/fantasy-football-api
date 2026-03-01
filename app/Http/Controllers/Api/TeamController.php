@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\SwapPlayersRequest;
 use App\Http\Requests\Api\UpdateTeamRequest;
 use App\Http\Resources\Api\TeamResource;
-use App\Services\Api\SquadService;
+use App\Services\Api\PlayerService;
 use App\Services\Api\TeamService;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
@@ -49,7 +49,7 @@ class TeamController extends Controller
         ], 200);
     }
 
-    public function swap(SwapPlayersRequest $request, SquadService $service)
+    public function swap(SwapPlayersRequest $request, PlayerService $service)
     {
         $team = auth()->user()->team;
 
