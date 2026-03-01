@@ -78,7 +78,7 @@ class MarketListingController extends Controller
             $listing
         );
 
-        $transfer->loa d([
+        $transfer->load([
             'player',
             'sellerTeam',
             'buyerTeam',
