@@ -14,8 +14,8 @@ return [
             'MF' => 4,
             'FW' => 2,
         ],
-        'initial_budget' => 5_000_000 * 100,
-        'initial_market_value' => 1_000_000 * 100,
+        'initial_budget' => 5_000_000 ,
+        'initial_market_value' => 1_000_000,
     ],
 
 ];
