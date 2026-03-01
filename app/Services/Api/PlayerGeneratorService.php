@@ -3,6 +3,9 @@
 namespace App\Services\Api;
 
 use App\Models\Team;
+use App\Support\Factories\FirstNameFactory;
+use App\Support\Factories\LastNameFactory;
+use App\Support\Factories\CountryFactory;
 
 class PlayerGeneratorService
 {
@@ -32,11 +35,11 @@ class PlayerGeneratorService
 
                 $players[] = [
                     'team_id' => $team->id,
-                    'first_name' => fake()->firstName(),
-                    'last_name' => fake()->lastName(),
-                    'country' => fake()->country(),
-                    'age' => random_int(18, 40),
-                    'position' => $position,
+                    'first_name' => FirstNameFactory::random(),
+                    'last_name'  => LastNameFactory::random(),
+                    'country'    => CountryFactory::random(),
+                    'age'        => random_int(18, 40),
+                    'position'   => $position,
                     'squad_role' => $i < $starterLimit ? 'starter' : 'bench',
                     'market_value' => 1000000 * 100,
                     'created_at' => now(),

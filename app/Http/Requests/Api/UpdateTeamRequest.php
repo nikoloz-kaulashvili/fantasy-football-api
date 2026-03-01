@@ -22,8 +22,13 @@ class UpdateTeamRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'min:3', 'max:255'],
-            'country' => ['required', 'string', 'min:2', 'max:255'],
+            'name' => ['required', 'array'],
+            'name.en' => ['required', 'string', 'min:3', 'max:255'],
+            'name.ka' => ['required', 'string', 'min:3', 'max:255'],
+
+            'country' => ['required', 'array'],
+            'country.en' => ['required', 'string', 'min:2', 'max:255'],
+            'country.ka' => ['required', 'string', 'min:2', 'max:255'],
         ];
     }
 
@@ -31,14 +36,30 @@ class UpdateTeamRequest extends FormRequest
     {
         return [
             'name.required' => __('validation.required'),
-            'name.string'   => __('validation.string'),
-            'name.min'      => __('validation.min.string'),
-            'name.max'      => __('validation.max.string'),
+            'name.array'    => __('validation.array'),
+
+            'name.en.required' => __('validation.required'),
+            'name.en.string'   => __('validation.string'),
+            'name.en.min'      => __('validation.min.string'),
+            'name.en.max'      => __('validation.max.string'),
+
+            'name.ka.required' => __('validation.required'),
+            'name.ka.string'   => __('validation.string'),
+            'name.ka.min'      => __('validation.min.string'),
+            'name.ka.max'      => __('validation.max.string'),
 
             'country.required' => __('validation.required'),
-            'country.string'   => __('validation.string'),
-            'country.min'      => __('validation.min.string'),
-            'country.max'      => __('validation.max.string'),
+            'country.array'    => __('validation.array'),
+
+            'country.en.required' => __('validation.required'),
+            'country.en.string'   => __('validation.string'),
+            'country.en.min'      => __('validation.min.string'),
+            'country.en.max'      => __('validation.max.string'),
+
+            'country.ka.required' => __('validation.required'),
+            'country.ka.string'   => __('validation.string'),
+            'country.ka.min'      => __('validation.min.string'),
+            'country.ka.max'      => __('validation.max.string'),
         ];
     }
 }

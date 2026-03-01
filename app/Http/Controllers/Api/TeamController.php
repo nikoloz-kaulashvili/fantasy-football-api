@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\SwapPlayersRequest;
 use App\Http\Requests\Api\UpdateTeamRequest;
 use App\Services\Api\SquadService;
+use App\Services\Api\TeamService;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class TeamController extends Controller
@@ -35,10 +36,9 @@ class TeamController extends Controller
         ]);
     }
 
-    public function update(UpdateTeamRequest $request)
+    public function update(UpdateTeamRequest $request, TeamService $service)
     {
         $user = auth()->user();
-
         $team = $user->team;
 
         if (!$team) {
@@ -49,10 +49,7 @@ class TeamController extends Controller
 
         $this->authorize('update', $team);
 
-        $team->update([
-            'name' => $request->name,
-            'country' => $request->country,
-        ]);
+        $team = $service->updateTeam($team, $request->validated());
 
         return response()->json([
             'message' => __('messages.team_updated'),
@@ -65,7 +62,6 @@ class TeamController extends Controller
             ]
         ]);
     }
-
     public function swap(SwapPlayersRequest $request, SquadService $service)
     {
         $team = auth()->user()->team;

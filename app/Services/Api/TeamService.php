@@ -5,6 +5,7 @@ namespace App\Services\Api;
 use App\Models\Team;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use App\Support\Factories\CountryFactory;
 
 class TeamService
 {
@@ -18,8 +19,14 @@ class TeamService
 
             $team = Team::create([
                 'user_id' => $user->id,
-                'name' => $user->name . "'s Team",
-                'country' => fake()->country(),
+
+                'name' => [
+                    'en' => "{$user->name}'s Team",
+                    'ka' => "{$user->name}-ის გუნდი",
+                ],
+
+                'country' => CountryFactory::random(),
+
                 'budget' => 5000000 * 100,
             ]);
 
@@ -27,5 +34,21 @@ class TeamService
 
             return $team;
         });
+    }
+
+    public function updateTeam(Team $team, array $data): Team
+    {
+        $team->update([
+            'name' => [
+                'en' => $data['name']['en'],
+                'ka' => $data['name']['ka'],
+            ],
+            'country' => [
+                'en' => $data['country']['en'],
+                'ka' => $data['country']['ka'],
+            ],
+        ]);
+
+        return $team->fresh();
     }
 }
