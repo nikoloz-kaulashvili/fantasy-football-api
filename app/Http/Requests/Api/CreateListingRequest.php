@@ -23,7 +23,20 @@ class CreateListingRequest  extends FormRequest
     {
         return [
             'player_id' => ['required', 'integer', 'exists:players,id'],
-            'price' => ['required', 'integer', 'min:1'], // cents
+            'price' => ['required', 'integer', 'min:1'], 
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'player_id.required' => __('validation.required'),
+            'player_id.integer' => __('validation.integer'),
+            'player_id.exists' => __('validation.exists'),
+
+            'price.required' => __('validation.required'),
+            'price.integer' => __('validation.integer'),
+            'price.min' => __('validation.min.numeric'),
         ];
     }
 }

@@ -26,4 +26,19 @@ class UpdateTeamRequest extends FormRequest
             'country' => ['required', 'string', 'min:2', 'max:255'],
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'name.required' => __('validation.required'),
+            'name.string'   => __('validation.string'),
+            'name.min'      => __('validation.min.string'),
+            'name.max'      => __('validation.max.string'),
+
+            'country.required' => __('validation.required'),
+            'country.string'   => __('validation.string'),
+            'country.min'      => __('validation.min.string'),
+            'country.max'      => __('validation.max.string'),
+        ];
+    }
 }

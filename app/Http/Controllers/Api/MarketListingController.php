@@ -40,7 +40,7 @@ class MarketListingController extends Controller
         );
 
         return response()->json([
-            'message' => 'Player listed successfully.',
+            'message' => __('messages.player_listed_successfully'),
             'data' => $listing->load(['player', 'sellerTeam']),
         ], 201);
     }
@@ -52,7 +52,7 @@ class MarketListingController extends Controller
         $this->market->cancelListing($request->user(), $listing);
 
         return response()->json([
-            'message' => 'Listing cancelled successfully.',
+            'message' => __('messages.listing_cancelled_successfully'),
         ]);
     }
 
@@ -61,7 +61,7 @@ class MarketListingController extends Controller
         $transfer = $this->market->buyListing($request->user(), $listing);
 
         return response()->json([
-            'message' => 'Transfer completed successfully.',
+            'message' => __('messages.transfer_completed_successfully'),
             'data' => $transfer,
         ]);
     }

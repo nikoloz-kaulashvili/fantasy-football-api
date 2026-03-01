@@ -27,4 +27,21 @@ class RegisterRequest extends FormRequest
             'password' => ['required', 'min:6', 'confirmed'],
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'name.required' => __('validation.required'),
+            'name.string' => __('validation.string'),
+            'name.max' => __('validation.max.string'),
+
+            'email.required' => __('validation.required'),
+            'email.email' => __('validation.email'),
+            'email.unique' => __('validation.unique'),
+
+            'password.required' => __('validation.required'),
+            'password.min' => __('validation.min.string'),
+            'password.confirmed' => __('validation.confirmed'),
+        ];
+    }
 }
