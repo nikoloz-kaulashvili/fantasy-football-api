@@ -19,9 +19,9 @@ return new class extends Migration
                 ->constrained()
                 ->cascadeOnDelete();
 
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('country');
+            $table->json('first_name');
+            $table->json('last_name');
+            $table->json('country');
 
             $table->unsignedTinyInteger('age');
 

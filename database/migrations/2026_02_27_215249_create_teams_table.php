@@ -16,8 +16,8 @@ return new class extends Migration
 
             $table->foreignId('user_id')->unique()->constrained()->cascadeOnDelete();
 
-            $table->string('name');
-            $table->string('country');
+            $table->json('name');
+            $table->json('country');
 
             $table->unsignedBigInteger('budget')->default(5000000 * 100);
 
