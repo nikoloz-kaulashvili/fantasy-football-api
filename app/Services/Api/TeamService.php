@@ -27,7 +27,7 @@ class TeamService
 
                 'country' => CountryFactory::random(),
 
-                'budget' => 5000000 * 100,
+                'budget' => config('fantasy.team.initial_budget'),
             ]);
 
             $this->playerGenerator->generateForTeam($team);
