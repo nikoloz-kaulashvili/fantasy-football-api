@@ -10,12 +10,10 @@ class TeamFactory extends Factory
 {
     public function definition(): array
     {
-        $country = CountryFactory::random();
-
         return [
             'user_id' => User::factory(),
             'name' => fake()->company() . ' FC',
-            'country' => $country,
+            'country' => CountryFactory::random(),
             'budget' => config('fantasy.team.initial_budget'),
         ];
     }

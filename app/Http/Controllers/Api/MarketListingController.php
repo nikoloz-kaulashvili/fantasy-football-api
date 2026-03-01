@@ -27,10 +27,9 @@ class MarketListingController extends Controller
             ->with(['player', 'sellerTeam'])
             ->latest()
             ->paginate(20);
-
+        
         return response()->json([
             'success' => true,
-            'message' => __('messages.listings_fetched'),
             'data' => TransferListingResource::collection($listings->items()),
             'meta' => [
                 'current_page' => $listings->currentPage(),

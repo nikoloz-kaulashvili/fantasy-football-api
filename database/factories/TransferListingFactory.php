@@ -13,7 +13,7 @@ class TransferListingFactory extends Factory
         return [
             'player_id' => Player::factory(),
             'seller_team_id' => Team::factory(),
-            'price' => rand(1500000, 3000000) * 100,
+            'price' => rand(1500000, 3000000),
             'is_active' => 1,
         ];
     }

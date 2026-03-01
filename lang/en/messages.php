@@ -11,6 +11,7 @@ return [
     'team_updated' => 'Team updated successfully.',
     'swap_success' => 'Players swapped successfully.',
     'unauthorized' => 'Unauthorized action.',
+    'listings_fetched' => 'Player has been successfully listed on the transfer market.',
     'same_player_swap' => 'You cannot swap the same player.',
     'players_not_same_team' => 'Both players must belong to the same team.',
     'player_must_be_bench' => 'Selected player must be on the bench.',
