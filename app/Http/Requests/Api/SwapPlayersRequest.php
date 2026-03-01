@@ -30,13 +30,13 @@ class SwapPlayersRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'in_player_id.required' => __('validation.required'),
-            'in_player_id.integer'  => __('validation.integer'),
-            'in_player_id.exists'   => __('validation.exists'),
+            'in_player_id.required' => __('messages.required'),
+            'in_player_id.integer'  => __('messages.integer'),
+            'in_player_id.exists'   => __('messages.exists'),
 
-            'out_player_id.required' => __('validation.required'),
-            'out_player_id.integer'  => __('validation.integer'),
-            'out_player_id.exists'   => __('validation.exists'),
+            'out_player_id.required' => __('messages.required'),
+            'out_player_id.integer'  => __('messages.integer'),
+            'out_player_id.exists'   => __('messages.exists'),
         ];
     }
 }

@@ -30,13 +30,13 @@ class CreateListingRequest  extends FormRequest
     public function messages(): array
     {
         return [
-            'player_id.required' => __('validation.required'),
-            'player_id.integer' => __('validation.integer'),
-            'player_id.exists' => __('validation.exists'),
+            'player_id.required' => __('messages.required'),
+            'player_id.integer' => __('messages.integer'),
+            'player_id.exists' => __('messages.exists'),
 
-            'price.required' => __('validation.required'),
-            'price.integer' => __('validation.integer'),
-            'price.min' => __('validation.min.numeric'),
+            'price.required' => __('messages.required'),
+            'price.integer' => __('messages.integer'),
+            'price.min' => __('messages.min.numeric'),
         ];
     }
 }

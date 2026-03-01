@@ -31,17 +31,17 @@ class RegisterRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'name.required' => __('validation.required'),
-            'name.string' => __('validation.string'),
-            'name.max' => __('validation.max.string'),
+            'name.required' => __('messages.required'),
+            'name.string' => __('messages.string'),
+            'name.max' => __('messages.max.string'),
 
-            'email.required' => __('validation.required'),
-            'email.email' => __('validation.email'),
-            'email.unique' => __('validation.unique'),
+            'email.required' => __('messages.required'),
+            'email.email' => __('messages.email'),
+            'email.unique' => __('messages.unique'),
 
-            'password.required' => __('validation.required'),
-            'password.min' => __('validation.min.string'),
-            'password.confirmed' => __('validation.confirmed'),
+            'password.required' => __('messages.required'),
+            'password.min' => __('messages.min.string'),
+            'password.confirmed' => __('messages.confirmed'),
         ];
     }
 }

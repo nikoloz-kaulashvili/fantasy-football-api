@@ -32,7 +32,7 @@ class TransferMarketService
 
             if ($alreadyListed) {
                 throw ValidationException::withMessages([
-                    'player_id' => [__('validation.player_already_listed')],
+                    'player_id' => [__('messages.player_already_listed')],
                 ]);
             }
 
@@ -60,7 +60,7 @@ class TransferMarketService
 
             if ((int) $lockedListing->seller_team_id !== (int) $team->id) {
                 throw ValidationException::withMessages([
-                    'listing' => [__('validation.not_owner')],
+                    'listing' => [__('messages.not_owner')],
                 ]);
             }
 
@@ -85,7 +85,7 @@ class TransferMarketService
 
             if ((int) $lockedListing->seller_team_id === (int) $buyerTeam->id) {
                 throw ValidationException::withMessages([
-                    'listing' => [__('validation.cannot_buy_own_player')],
+                    'listing' => [__('messages.cannot_buy_own_player')],
                 ]);
             }
 
@@ -99,13 +99,13 @@ class TransferMarketService
 
             if ((int) $player->team_id !== (int) $sellerTeam->id) {
                 throw ValidationException::withMessages([
-                    'listing' => [__('validation.listing_invalid')],
+                    'listing' => [__('messages.listing_invalid')],
                 ]);
             }
 
             if ((int) $buyerTeam->budget < (int) $lockedListing->price) {
                 throw ValidationException::withMessages([
-                    'budget' => [__('validation.insufficient_budget')],
+                    'budget' => [__('messages.insufficient_budget')],
                 ]);
             }
 

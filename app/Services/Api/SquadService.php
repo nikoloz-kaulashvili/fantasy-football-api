@@ -34,11 +34,16 @@ class SquadService
             ]);
         }
 
+        if ($in->position === 'GK' && $out->position !== 'GK') {
+            throw ValidationException::withMessages([
+                'goalkeeper' => __('messages.goalkeeper_can_only_swap_with_goalkeeper')
+            ]);
+        }
+
         DB::transaction(function () use ($in, $out) {
 
             $in->update(['squad_role' => 'starter']);
             $out->update(['squad_role' => 'bench']);
-
         });
     }
 }

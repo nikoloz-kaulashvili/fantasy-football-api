@@ -39,44 +39,44 @@ class UpdatePlayerRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'first_name.required' => __('validation.required'),
-            'first_name.array'    => __('validation.array'),
+            'first_name.required' => __('messages.required'),
+            'first_name.array'    => __('messages.array'),
 
-            'first_name.en.required' => __('validation.required'),
-            'first_name.en.string'   => __('validation.string'),
-            'first_name.en.min'      => __('validation.min.string'),
-            'first_name.en.max'      => __('validation.max.string'),
+            'first_name.en.required' => __('messages.required'),
+            'first_name.en.string'   => __('messages.string'),
+            'first_name.en.min'      => __('messages.min.string'),
+            'first_name.en.max'      => __('messages.max.string'),
 
-            'first_name.ka.required' => __('validation.required'),
-            'first_name.ka.string'   => __('validation.string'),
-            'first_name.ka.min'      => __('validation.min.string'),
-            'first_name.ka.max'      => __('validation.max.string'),
+            'first_name.ka.required' => __('messages.required'),
+            'first_name.ka.string'   => __('messages.string'),
+            'first_name.ka.min'      => __('messages.min.string'),
+            'first_name.ka.max'      => __('messages.max.string'),
 
-            'last_name.required' => __('validation.required'),
-            'last_name.array'    => __('validation.array'),
+            'last_name.required' => __('messages.required'),
+            'last_name.array'    => __('messages.array'),
 
-            'last_name.en.required' => __('validation.required'),
-            'last_name.en.string'   => __('validation.string'),
-            'last_name.en.min'      => __('validation.min.string'),
-            'last_name.en.max'      => __('validation.max.string'),
+            'last_name.en.required' => __('messages.required'),
+            'last_name.en.string'   => __('messages.string'),
+            'last_name.en.min'      => __('messages.min.string'),
+            'last_name.en.max'      => __('messages.max.string'),
 
-            'last_name.ka.required' => __('validation.required'),
-            'last_name.ka.string'   => __('validation.string'),
-            'last_name.ka.min'      => __('validation.min.string'),
-            'last_name.ka.max'      => __('validation.max.string'),
+            'last_name.ka.required' => __('messages.required'),
+            'last_name.ka.string'   => __('messages.string'),
+            'last_name.ka.min'      => __('messages.min.string'),
+            'last_name.ka.max'      => __('messages.max.string'),
 
-            'country.required' => __('validation.required'),
-            'country.array'    => __('validation.array'),
+            'country.required' => __('messages.required'),
+            'country.array'    => __('messages.array'),
 
-            'country.en.required' => __('validation.required'),
-            'country.en.string'   => __('validation.string'),
-            'country.en.min'      => __('validation.min.string'),
-            'country.en.max'      => __('validation.max.string'),
+            'country.en.required' => __('messages.required'),
+            'country.en.string'   => __('messages.string'),
+            'country.en.min'      => __('messages.min.string'),
+            'country.en.max'      => __('messages.max.string'),
 
-            'country.ka.required' => __('validation.required'),
-            'country.ka.string'   => __('validation.string'),
-            'country.ka.min'      => __('validation.min.string'),
-            'country.ka.max'      => __('validation.max.string'),
+            'country.ka.required' => __('messages.required'),
+            'country.ka.string'   => __('messages.string'),
+            'country.ka.min'      => __('messages.min.string'),
+            'country.ka.max'      => __('messages.max.string'),
         ];
     }
 }
