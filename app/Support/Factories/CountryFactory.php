@@ -7,7 +7,6 @@ class CountryFactory
     public static function random(): array
     {
         $countries = config('countries');
-
         $country = $countries[array_rand($countries)];
 
         return [

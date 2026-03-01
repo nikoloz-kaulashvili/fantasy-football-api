@@ -7,7 +7,6 @@ class FirstNameFactory
     public static function random(): array
     {
         $names = config('first_names');
-
         $name = $names[array_rand($names)];
 
         return [

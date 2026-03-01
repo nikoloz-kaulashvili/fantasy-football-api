@@ -10,24 +10,33 @@ use App\Services\Api\TeamService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
 {
     public function register(RegisterRequest $request, TeamService $teamService)
     {
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+        $result = DB::transaction(function () use ($request, $teamService) {
 
-        $teamService->createForUser($user);
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+            ]);
 
-        $token = $user->createToken('api_token')->plainTextToken;
+            $teamService->createForUser($user);
+
+            $token = $user->createToken('api_token')->plainTextToken;
+
+            return [
+                'user' => $user,
+                'token' => $token,
+            ];
+        });
 
         return response()->json([
             'message' => __('messages.user_registered_successfully'),
-            'token' => $token,
+            'token' => $result['token'],
         ], 201);
     }
 

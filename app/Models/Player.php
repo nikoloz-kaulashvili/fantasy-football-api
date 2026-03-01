@@ -20,6 +20,12 @@ class Player extends Model
         'squad_role'
     ];
 
+    protected $casts = [
+        'first_name' => 'array',
+        'last_name'  => 'array',
+        'country'    => 'array',
+    ];
+
     public function team()
     {
         return $this->belongsTo(Team::class);

@@ -6,13 +6,12 @@ class LastNameFactory
 {
     public static function random(): array
     {
-        $names = config('last_names');
-
-        $name = $names[array_rand($names)];
-
+        $lastNames = config('last_names');
+        $lastName = $lastNames[array_rand($lastNames)];
+        
         return [
-            'en' => $name['en'],
-            'ka' => $name['ka'],
+            'en' => $lastName['en'],
+            'ka' => $lastName['ka'],
         ];
     }
 }

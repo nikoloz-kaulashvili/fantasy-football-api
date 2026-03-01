@@ -16,6 +16,11 @@ class Team extends Model
         'budget',
     ];
 
+    protected $casts = [
+        'name' => 'array',
+        'country' => 'array',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);

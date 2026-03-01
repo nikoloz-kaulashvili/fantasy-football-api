@@ -25,16 +25,13 @@ class PlayerGeneratorService
 
     public function generateForTeam(Team $team): void
     {
-        $players = [];
-
         foreach (self::POSITIONS as $position => $count) {
 
             $starterLimit = self::STARTERS[$position];
 
             for ($i = 0; $i < $count; $i++) {
 
-                $players[] = [
-                    'team_id' => $team->id,
+                $team->players()->create([
                     'first_name' => FirstNameFactory::random(),
                     'last_name'  => LastNameFactory::random(),
                     'country'    => CountryFactory::random(),
@@ -42,12 +39,8 @@ class PlayerGeneratorService
                     'position'   => $position,
                     'squad_role' => $i < $starterLimit ? 'starter' : 'bench',
                     'market_value' => 1000000 * 100,
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ];
+                ]);
             }
         }
-
-        $team->players()->insert($players);
     }
 }
