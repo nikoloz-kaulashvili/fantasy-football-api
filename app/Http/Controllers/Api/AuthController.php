@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\LoginRequest;
 use App\Http\Requests\Api\RegisterRequest;
+use App\Jobs\GenerateTeamForUserJob;
 use App\Models\User;
 use App\Services\Api\TeamService;
 use Illuminate\Http\Request;
@@ -24,8 +25,8 @@ class AuthController extends Controller
                 'password' => Hash::make($request->password),
             ]);
 
-            $teamService->createForUser($user);
-
+            GenerateTeamForUserJob::dispatch($user);
+            
             $token = $user->createToken('api_token')->plainTextToken;
 
             return [
