@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Translatable\HasTranslations;
 
 class Player extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, HasTranslations;
 
     protected $fillable = [
         'team_id',
@@ -20,10 +21,10 @@ class Player extends Model
         'squad_role'
     ];
 
-    protected $casts = [
-        'first_name' => 'array',
-        'last_name'  => 'array',
-        'country'    => 'array',
+    public array $translatable = [
+        'first_name',
+        'last_name',
+        'country',
     ];
 
     public function team()

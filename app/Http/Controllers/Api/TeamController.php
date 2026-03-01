@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\SwapPlayersRequest;
 use App\Http\Requests\Api\UpdateTeamRequest;
+use App\Http\Resources\Api\TeamResource;
 use App\Services\Api\SquadService;
 use App\Services\Api\TeamService;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -23,17 +24,7 @@ class TeamController extends Controller
 
         $this->authorize('view', $team);
 
-        return response()->json([
-            'id' => $team->id,
-            'name' => $team->name,
-            'country' => $team->country,
-            'budget' => $team->budget,
-            'total_value' => $team->total_value,
-            'players' => [
-                'starters' => $team->starters,
-                'bench' => $team->bench,
-            ],
-        ]);
+        return new TeamResource($team);
     }
 
     public function update(UpdateTeamRequest $request, TeamService $service)

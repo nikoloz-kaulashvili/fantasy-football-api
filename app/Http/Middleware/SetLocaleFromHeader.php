@@ -13,8 +13,16 @@ class SetLocaleFromHeader
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next)
     {
+        $locale = $request->header('Accept-Language', 'en');
+
+         if (! in_array($locale, ['en', 'ka'])) {
+            $locale = 'en';
+        }
+
+        app()->setLocale($locale);
+
         return $next($request);
     }
 }
