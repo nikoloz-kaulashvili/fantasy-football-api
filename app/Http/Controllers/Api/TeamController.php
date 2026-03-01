@@ -43,16 +43,12 @@ class TeamController extends Controller
         $team = $service->updateTeam($team, $request->validated());
 
         return response()->json([
+            'success' => true,
             'message' => __('messages.team_updated'),
-            'data' => [
-                'id' => $team->id,
-                'name' => $team->name,
-                'country' => $team->country,
-                'budget' => $team->budget,
-                'total_value' => $team->total_value,
-            ]
-        ]);
+            'data' => new TeamResource($team),
+        ], 200);
     }
+
     public function swap(SwapPlayersRequest $request, SquadService $service)
     {
         $team = auth()->user()->team;

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\CreateListingRequest;
 use App\Http\Requests\Api\BuyListingRequest;
+use App\Http\Resources\Api\TransferListingResource;
+use App\Http\Resources\Api\TransferResource;
 use App\Models\TransferListing;
 use App\Services\Api\TransferMarketService;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -20,12 +22,22 @@ class MarketListingController extends Controller
 
     public function index(Request $request)
     {
-        $query = TransferListing::query()
+        $listings = TransferListing::query()
             ->where('is_active', 1)
-            ->with(['player', 'sellerTeam']);
+            ->with(['player', 'sellerTeam'])
+            ->latest()
+            ->paginate(20);
 
         return response()->json([
-            'data' => $query->latest()->paginate(20),
+            'success' => true,
+            'message' => __('messages.listings_fetched'),
+            'data' => TransferListingResource::collection($listings->items()),
+            'meta' => [
+                'current_page' => $listings->currentPage(),
+                'last_page' => $listings->lastPage(),
+                'per_page' => $listings->perPage(),
+                'total' => $listings->total(),
+            ]
         ]);
     }
 
@@ -39,9 +51,12 @@ class MarketListingController extends Controller
             $request->price
         );
 
+        $listing->load(['player', 'sellerTeam']);
+
         return response()->json([
+            'success' => true,
             'message' => __('messages.player_listed_successfully'),
-            'data' => $listing->load(['player', 'sellerTeam']),
+            'data' => new TransferListingResource($listing),
         ], 201);
     }
 
@@ -58,11 +73,21 @@ class MarketListingController extends Controller
 
     public function buy(Request $request, TransferListing $listing)
     {
-        $transfer = $this->market->buyListing($request->user(), $listing);
+        $transfer = $this->market->buyListing(
+            $request->user(),
+            $listing
+        );
+
+        $transfer->loa d([
+            'player',
+            'sellerTeam',
+            'buyerTeam',
+        ]);
 
         return response()->json([
+            'success' => true,
             'message' => __('messages.transfer_completed_successfully'),
-            'data' => $transfer,
-        ]);
+            'data' => new TransferResource($transfer),
+        ], 200);
     }
 }
