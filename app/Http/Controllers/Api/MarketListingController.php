@@ -11,6 +11,7 @@ use App\Models\TransferListing;
 use App\Services\Api\TransferMarketService;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class MarketListingController extends Controller
 {
@@ -22,22 +23,22 @@ class MarketListingController extends Controller
 
     public function index(Request $request)
     {
-        $listings = TransferListing::query()
-            ->where('is_active', 1)
-            ->with(['player', 'sellerTeam'])
-            ->latest()
-            ->paginate(20);
-        
-        return response()->json([
-            'success' => true,
-            'data' => TransferListingResource::collection($listings->items()),
-            'meta' => [
-                'current_page' => $listings->currentPage(),
-                'last_page' => $listings->lastPage(),
-                'per_page' => $listings->perPage(),
-                'total' => $listings->total(),
-            ]
-        ]);
+        $page = $request->input('page', 1);
+
+        $cacheKey = "market.listings.page.{$page}";
+
+        $listings = Cache::remember($cacheKey, 60, function () {
+            return TransferListing::query()
+                ->where('is_active', 1)
+                ->with(['player', 'sellerTeam'])
+                ->latest()
+                ->paginate(20);
+        });
+
+        return TransferListingResource::collection($listings)
+            ->additional([
+                'success' => true,
+            ]);
     }
 
     public function store(CreateListingRequest $request)
