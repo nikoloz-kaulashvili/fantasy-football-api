@@ -15,11 +15,14 @@ class SetLocaleFromHeader
      */
     public function handle(Request $request, Closure $next)
     {
-        $locale = $request->header('Accept-Language', 'en');
+        $locale = $request->header('Accept-Language', 'gb');
 
-         if (! in_array($locale, ['en', 'ka'])) {
-            $locale = 'en';
-        }
+        $map = [
+            'gb' => 'en',
+            'ge' => 'ka',
+        ];
+
+        $locale = $map[$locale] ?? 'en';
 
         app()->setLocale($locale);
 
