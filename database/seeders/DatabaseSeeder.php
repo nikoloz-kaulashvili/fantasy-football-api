@@ -1,19 +1,24 @@
 <?php
 
-use App\Jobs\GenerateTeamForUserJob;
-use App\Models\User;
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use App\Services\Api\TeamService;
 
 class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        $users = User::factory()
-            ->count(2)
-            ->create();
+        $user = User::updateOrCreate(
+            ['email' => 'admin@fantasy.ge'],
+            [
+                'name' => 'Admin User',
+                'password' => Hash::make('12345678'),
+            ]
+        );
 
-        foreach ($users as $user) {
-            GenerateTeamForUserJob::dispatch($user);
-        }
+        app(TeamService::class)->createForUser($user);
     }
 }
