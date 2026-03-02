@@ -13,11 +13,8 @@ class PlayerController extends Controller
 {
     use AuthorizesRequests;
 
-    public function update(
-        UpdatePlayerRequest $request,
-        Player $player,
-        PlayerService $service
-    ) {
+    public function update(UpdatePlayerRequest $request, Player $player, PlayerService $service) 
+    {
         $this->authorize('update', $player);
 
         $updatedPlayer = $service->updatePlayer(

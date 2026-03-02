@@ -7,7 +7,6 @@ use App\Http\Requests\Api\LoginRequest;
 use App\Http\Requests\Api\RegisterRequest;
 use App\Jobs\GenerateTeamForUserJob;
 use App\Models\User;
-use App\Services\Api\TeamService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
@@ -15,9 +14,9 @@ use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
 {
-    public function register(RegisterRequest $request, TeamService $teamService)
+    public function register(RegisterRequest $request)
     {
-        $result = DB::transaction(function () use ($request, $teamService) {
+        $result = DB::transaction(function () use ($request) {
 
             $user = User::create([
                 'name' => $request->name,

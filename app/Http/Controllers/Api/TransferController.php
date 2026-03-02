@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Api\TransferResource;
 use App\Models\Transfer;
-use Illuminate\Http\Request;
 
 class TransferController extends Controller
 {

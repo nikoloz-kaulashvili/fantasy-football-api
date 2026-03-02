@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\CreateListingRequest;
-use App\Http\Requests\Api\BuyListingRequest;
 use App\Http\Resources\Api\TransferListingResource;
 use App\Http\Resources\Api\TransferResource;
 use App\Models\TransferListing;
