@@ -1,59 +1,210 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+ინსტალაცია 
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
 
-## About Laravel
+FANTASY FOOTBALL API
+არქიტექტურა და განხორციელებული ფუნქციონალი
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+1) სისტემის მიმოხილვა:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Fantasy Football REST API შექმნილია Laravel 12-ის გამოყენებით და მუშაობს Laravel Sanctum.
+სისტემა მომხმარებელს აძლევს შესაძლებლობას დარეგისტრირდეს, მიიღოს ავტომატურად გენერირებული გუნდი, მართოს საკუთარი ფეხბურთელები, 
+გაყიდოს მოთამაშეები სატრანსფერო ბაზარზე და შეიძინოს სხვა მოთამაშეები. პროექტი ორენოვანია.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+2) ავტენტიფიკაცია
 
-## Learning Laravel
+სისტემაში იყენებს რეგისტრაცია, ავტორიზაცია, logout და დაცული API endpoint-ებს. ავტორიზაცია ხორციელდება Sanctum გამოყენებით.
+რეგისტრაციის პროცესში ავტომატურად იქმნება გუნდი და გენერირდება 20 ფეხბურთელი. ასევე გუნდ ენიჭება საწყისი ხუთ მილიონი ბიუჯეტი.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+3) გუნდის ავტომატური გენერაცია
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+რეგისტრაციის შემდეგ სისტემა ქმნის სამ მეკარეს, ექვს მცველს, ექვს ნახევარმცველს და ხუთ თავდამსხმელს. თითოეულ ფეხბურთელს აქვს შემთხვევითი სახელი, გვარი და ქვეყანა.(ორენოვანი) 
+ასაკი განისაზღვრება თვრამეტიდან ორმოც წლამდე. საწყისი საბაზრო ღირებულება არის ერთი მილიონი დოლარი.
 
-## Laravel Sponsors
+4) გუნდის მართვა
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+მომხმარებელს შეუძლია საკუთარი გუნდის სრული ინფორმაციის ნახვა. შესაძლებელია გუნდის სახელისა და ქვეყნის შეცვლა (ორენოვანი). 
+შესაძლებელია მოთამაშეების შეცვლა ძირითადიდან სათადარიგოზე და პირიქით.
 
-### Premium Partners
+5) ფეხბურთელის მართვა
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+მომხმარებელს შეუძლია შეცვალოს ფეხბურთელის სახელი, გვარი და ქვეყანა (ორენოვანი). 
+ყველა მოქმედება კონტროლდება autorization policy, რაც უზრუნველყოფს უსაფრთხოებას.
 
-## Contributing
+6) სატრანსფერო ბაზარი
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+სისტემა საშუალებას აძლევს მომხმარებელს გამოიტანოს ფეხბურთელი გასაყიდად ტრანსფერ მარკეტზე, ნახოს საჯარო ბაზარი და შეიძინოს სხვა გუნდის ფეხბურთელი. 
+წარმატებული ტრანსფერის შემდეგ მყიდველის ბიუჯეტი მცირდება, გამყიდველის ბიუჯეტი იზრდება და ფეხბურთელის საბაზრო ღირებულება იზრდება შემთხვევითად ათიდან ას პროცენტამდე.
 
-## Code of Conduct
+7) არქიტექტურის აღწერა
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+პროექტში გამოყენებულია Service Layer მიდგომა, სადაც ბიზნეს ლოგიკა გამოყოფილია Controller-ებიდან. გამოყენებულია Policy ავტორიზაცია. ტრანსფერები რეალიზებულია transaction script პრინციპით. 
+ობიექტების გენერაციაში გამოყენებულია Factory მიდგომა. ორენოვანი ველები ინახება JSON ფორმატში. ყველა API პასუხი დაბრუნდება ერთიანი JSON სტრუქტურით.რქიტექტურა და დიზაინ პატერნები
+პროექტი აგებულია შრეებად დაყოფილ არქიტექტურაზე და მიყვება Laravel-ის საუკეთესო პრაქტიკებს.
+გამოყენებულია Service Layer, სადაც ბიზნეს ლოგიკა გამიჯნულია Controller-ებიდან და განთავსებულია ცალკე სერვის კლასებში. ეს ზრდის კოდის სისუფთავეს და ტესტირებადობას.
+გამოყენებულია Factory Pattern მოთამაშეების გენერაციისა და ტესტირების მონაცემების შესაქმნელად. მონაცემთა საწყისი შევსებისთვის გამოყენებულია Seeders.
+ტრანსფერების დროს გამოყენებულია Database Transactions და Row Level Locking, რაც უზრუნველყოფს მონაცემთა კონსისტენტურობას და თავიდან აცილებს ერთდროულ ორმაგ შეძენას.
+ავტენტიფიკაცია რეალიზებულია Laravel Sanctum-ის გამოყენებით, ხოლო ავტორიზაცია კონტროლდება Policy კლასებით.
+API პასუხები სტანდარტიზებულია API Resource-ების საშუალებით და ბრუნდება ერთიანი JSON სტრუქტურით.
+გამოყენებულია Feature Testing კრიტიკული სცენარების შესამოწმებლად, მათ შორის რეგისტრაცია, ავტორიზაცია და ტრანსფერები.
+პროექტი იყენებს Localization მექანიზმს ქართულ და ინგლისურ ენაზე მხარდაჭერისთვის.
+დამატებით დანერგილია გლობალური ლოგირება, სადაც სისტემის მნიშვნელოვანი ქმედებები ინახება როგორც წარმატებული, ასევე წარუმატებელი ოპერაციების შემთხვევაში. ეს ზრდის მონიტორინგისა და დებაგინგის შესაძლებლობას.
+სატრანსფერო ბაზრის listing-ების შემთხვევაში გამოყენებულია ლოკალური ქეშირება, რაც ამცირებს მონაცემთა ბაზაზე დატვირთვას და ზრდის API-ის მუშაობის სისწრაფეს.
+მონაცემთა ბაზის დონეზე გამოყენებულია ინდექსირება კრიტიკულ ველებზე წარმადობის გასაუმჯობესებლად. ასევე ცხრილები ერთმანეთთან დაკავშირებულია foreign key-ების საშუალებით, 
+რაც უზრუნველყოფს რეფერენციული მთლიანობის დაცვას და მონაცემთა კონსისტენტურობას.
 
-## Security Vulnerabilities
+Documentation:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+URL:http://127.0.0.1:8000/api/v1/
+Authorization : bearer-token
+1) Registration
 
-## License
+POST /register
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Headers:
+Content-Type: application/json
+Accept: application/json
+
+Fields:
+name (string, required)
+email (string, required, unique)
+password (string, required, min:6)
+password_confirmation (string, required, must match password)
+
+2) Login
+
+POST /login
+
+Headers:
+Content-Type: application/json
+Accept: application/json
+
+Fields:
+email (string, required)
+password (string, required)
+
+3) Logout
+
+POST /logout
+
+Headers:
+Accept: application/json
+Authorization: Bearer {token}
+
+Fields:
+—
+
+4) Create Market Listing
+
+POST /market/listings
+
+Headers:
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {token}
+
+Fields:
+player_id (integer, required, must belong to authenticated user's team)
+price (integer, required, min:1)
+
+
+5) Buy Market Listing
+
+POST /market/listings/{id}/buy
+
+Headers:
+Accept: application/json
+Authorization: Bearer {token}
+
+Fields:
+—
+
+6) Swap Players
+
+POST /team/swap
+
+Headers:
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {token}
+
+Fields:
+in_player_id (integer, required, must belong to authenticated user's team, bench player)
+out_player_id (integer, required, must belong to authenticated user's team, starter player)
+
+7) Update Team
+
+PUT /team
+
+Headers:
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {token}
+
+Fields:
+name.en (string, required)
+name.ka (string, required)
+country.en (string, required)
+country.ka (string, required)
+
+8) Update Player
+
+PUT /players/{id}
+
+Headers:
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {token}
+
+Fields:
+first_name.en (string, required)
+first_name.ka (string, required)
+last_name.en (string, required)
+last_name.ka (string, required)
+country.en (string, required)
+country.ka (string, required)
+
+9) Update Market Listing
+
+PUT /market/listings/{id}
+
+Headers:
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {token}
+
+Fields:
+player_id (integer, required, must belong to authenticated user's team)
+price (integer, required, min:1) // $
+
+10) Get Market Listings
+
+GET /market/listings
+
+Headers:
+Accept: application/json
+Authorization: Bearer {token}
+
+Fields:
+—
+
+11) Get My Team
+
+GET /team
+
+Headers:
+Accept: application/json
+Authorization: Bearer {token}
+
+Fields:
+—
+
+12) Get My Transfers
+
+GET /my-transfers
+
+Headers:
+Accept: application/json
+Authorization: Bearer {token}
+
+Fields:
+—
