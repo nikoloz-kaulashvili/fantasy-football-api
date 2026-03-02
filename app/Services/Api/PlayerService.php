@@ -3,6 +3,7 @@
 namespace App\Services\Api;
 
 use App\Models\Player;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 
 class PlayerService
@@ -62,7 +63,6 @@ class PlayerService
         }
 
         DB::transaction(function () use ($in, $out) {
-
             $in->update(['squad_role' => 'starter']);
             $out->update(['squad_role' => 'bench']);
         });
