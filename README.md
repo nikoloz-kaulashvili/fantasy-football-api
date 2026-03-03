@@ -66,11 +66,14 @@ cd fantasy-football-api
 
 6) php artisan queue:table
 
-6) php artisan migrate
+7) php artisan migrate
 
-7) php artisan db:seed
+8) php artisan db:seed
 
-8) php artisan serve
+user:admin@fantasy.ge
+password:12345678
+
+9) php artisan serve
 
 10) php artisan test
 
@@ -81,9 +84,6 @@ http://127.0.0.1:8000/api/v1
 
 Documentation:
 postmen url : https://orange-equinox-259372.postman.co/workspace/My-Workspace~7b3150f6-d80a-475b-84c7-fb4e0d38c210/collection/30145677-a7a87419-59dc-4a51-8e31-3eafdf9cf903?action=share&source=copy-link&creator=30145677
-
-user:admin@fantasy.ge
-password:12345678
 
 URL:http://127.0.0.1:8000/api/v1/
 Authorization : bearer-token
